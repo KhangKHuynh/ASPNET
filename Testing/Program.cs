@@ -1,11 +1,24 @@
+using System.Data;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MySql.Data.MySqlClient;
+using Testing.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IDbConnection>((s) =>
+{
+    IDbConnection connection = new MySqlConnection(builder.Configuration.GetConnectionString("bestbuy"));
+    connection.Open();
+    return connection;
+});
+
+builder.Services.AddTransient<IProductRepository, ProductRepository>();
 
 var app = builder.Build();
 

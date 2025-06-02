@@ -407,7 +407,7 @@ ASALocalRun/
 # Ignoring appsettings.json
 *.suo
 *.user
- *.userosscache 
- *.sln.docstates
- *appsettings.json
+*.userosscache 
+*.sln.docstates
+*appsettings.json
 *.userprefs
